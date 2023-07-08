@@ -16,5 +16,9 @@ app=FastAPI(
 
 @app.get('/')
 def welcome():
-    return {'version': 'v1.0', 'published':'2023', 'contributors': 'Edgard Huanca & Michaell Huanca', 'github':'https://github.com/v1c4r10us/logger-mega', 'documentation':''}
+    return {'version': 'v1.0', 
+            'published':'2023',
+            'contributors': 'Edgard Huanca & Michaell Huanca',
+            'github':'https://github.com/v1c4r10us/logger-mega',
+            'documentation':''}
 
