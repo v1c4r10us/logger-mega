@@ -29,5 +29,5 @@ def welcome():
 def save(voltage: Voltage):
     new_voltage=dict(voltage)
     id=conn.Logger.Voltage.insert_one(new_voltage).inserted_id
-    voltage=conn.find_one({"_id":id})
-    return voltage
+    voltage=conn.Logger.Voltage.find_one({"_id":id})
+    return voltageEntity(voltage)
