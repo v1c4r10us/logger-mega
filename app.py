@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 import json
 from db import conn
+from schemas.voltage import voltageEntity
+from models.voltage import Voltage
 from datetime import datetime
 
 app=FastAPI(
@@ -24,12 +26,9 @@ def welcome():
             'github':'https://github.com/v1c4r10us/logger-mega',
             'documentation':''}
 
-@app.post('/save/{voltage}')
-def save(voltage: float):
-    now=datetime.now()
-    now=now.strftime('%d-%m-%Y %H:%M:%S')
-    new_voltage={now:voltage}
-    db=conn['logger']
-    collection=db['voltage']
-    collection.insert_one(new_voltage)
-    return {'server_says':'A new voltage added successfully!'}
+@app.post('/voltage', response_model=Voltage, tags=['Voltage'])
+def save(voltage: Voltage):
+    new_voltage=dict(voltage)
+    id=conn.insert_one.Logger.Voltage.insert_one(new_voltage).inserted_id
+    voltage=conn.find_one({"_id":id})
+    return voltage
