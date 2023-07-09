@@ -3,7 +3,6 @@ import json
 from db import conn
 from schemas.voltage import voltageEntity
 from models.voltage import Voltage
-from datetime import datetime
 
 app=FastAPI(
                 title="LoggerMega",
@@ -29,6 +28,6 @@ def welcome():
 @app.post('/voltage', response_model=Voltage, tags=['Voltage'])
 def save(voltage: Voltage):
     new_voltage=dict(voltage)
-    id=conn.insert_one.Logger.Voltage.insert_one(new_voltage).inserted_id
+    id=conn.Logger.Voltage.insert_one(new_voltage).inserted_id
     voltage=conn.find_one({"_id":id})
     return voltage
