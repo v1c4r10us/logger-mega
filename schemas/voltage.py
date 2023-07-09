@@ -1,7 +1,9 @@
 from datetime import datetime
+import pytz
 
 def voltageEntity(item) -> dict:
-    now=datetime.now()
+    tzInfo = pytz.timezone('America/Lima')
+    now=datetime.now(tz=tzInfo)
     date=now.strftime('%d-%m-%Y')
     time=now.strftime('%H:%M:%S')
     return {
@@ -27,3 +29,6 @@ def voltageEntity(item) -> dict:
             's_18': float(item['s_18']),
             's_19': float(item['s_19'])
     }
+
+def voltagesEntity(entity) -> list:
+    return [voltageEntity(item) for item in entity]

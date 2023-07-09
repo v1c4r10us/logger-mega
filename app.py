@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import json
 from db import conn
-from schemas.voltage import voltageEntity
+from schemas.voltage import voltageEntity, voltagesEntity
 from models.voltage import Voltage
 
 app=FastAPI(
@@ -23,11 +23,15 @@ def welcome():
             'published':'2023',
             'contributors': 'Edgard Huanca & Michaell Huanca',
             'github':'https://github.com/v1c4r10us/logger-mega',
-            'documentation':''}
+            'documentation':'https://logger-mega.vercel.app/docs'}
 
 @app.post('/voltage', response_model=Voltage, tags=['Voltage'])
-def save(voltage: Voltage):
+def save_new(voltage: Voltage):
     new_voltage=dict(voltage)
     id=conn.Logger.Voltage.insert_one(new_voltage).inserted_id
     voltage=conn.Logger.Voltage.find_one({"_id":id})
     return voltageEntity(voltage)
+
+@app.get('/voltages', response_model=list[Voltage], tags=['Get-Voltages'])
+def get_All():
+    return voltagesEntity(conn.Logger.Voltage.find())
