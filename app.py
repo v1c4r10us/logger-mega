@@ -17,7 +17,7 @@ app=FastAPI(
                 }
             )
 
-@app.get('/')
+@app.get('/', tags=['Welcome'])
 def welcome():
     return {'version': 'v1.0', 
             'published':'2023',

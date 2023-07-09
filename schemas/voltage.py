@@ -1,7 +1,12 @@
+from datetime import datetime
+
 def voltageEntity(item) -> dict:
+    now=datetime.now()
+    date=now.strft('%d-%m-%Y')
+    time=now.strft('%H:%M:%S')
     return {
-            'date': item['date'],
-            'time': item['time'],
+            'date': date,
+            'time': time,
             's_1': float(item['s_1']),
             's_2': float(item['s_2']),
             's_3': float(item['s_3']),
