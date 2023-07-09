@@ -3,6 +3,8 @@ import json
 from db import conn
 from schemas.voltage import voltageEntity, voltagesEntity
 from models.voltage import Voltage
+from datetime import datetime
+import pytz
 
 app=FastAPI(
                 title="LoggerMega",
@@ -28,10 +30,16 @@ def welcome():
 @app.post('/voltage', response_model=Voltage, tags=['Voltage'])
 def save_new(voltage: Voltage):
     new_voltage=dict(voltage)
+    tzInfo=pytz.timezone('America/Lima')
+    now=datetime.now(tz=tzInfo)
+    date=now.strftime('%d-%m-%Y')
+    time=now.strftime('%H:%M:%S')
+    new_voltage['date']=date
+    new_voltage['time']=time
     id=conn.Logger.Voltage.insert_one(new_voltage).inserted_id
     voltage=conn.Logger.Voltage.find_one({"_id":id})
     return voltageEntity(voltage)
 
-@app.get('/voltages', response_model=list[Voltage], tags=['Get-Voltages'])
+@app.get('/voltages',response_model=list[Voltage], tags=['Get-Voltages'])
 def get_All():
     return voltagesEntity(conn.Logger.Voltage.find())

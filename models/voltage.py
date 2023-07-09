@@ -1,8 +1,9 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class Voltage(BaseModel):
-    date: str
-    time: str
+    date: Optional[str]
+    time: Optional[str]
     s_1: float
     s_2: float
     s_3: float

@@ -1,14 +1,7 @@
-from datetime import datetime
-import pytz
-
 def voltageEntity(item) -> dict:
-    tzInfo = pytz.timezone('America/Lima')
-    now=datetime.now(tz=tzInfo)
-    date=now.strftime('%d-%m-%Y')
-    time=now.strftime('%H:%M:%S')
     return {
-            'date': str(date),
-            'time': str(time),
+            'date': str(item['date']),
+            'time': str(item['time']),
             's_1': float(item['s_1']),
             's_2': float(item['s_2']),
             's_3': float(item['s_3']),
