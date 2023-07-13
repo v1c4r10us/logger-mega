@@ -13,14 +13,7 @@ def voltageEntity(item) -> dict:
             's_9': float(item['s_9']),
             's_10': float(item['s_10']),
             's_11': float(item['s_11']),
-            's_12': float(item['s_12']),
-            's_13': float(item['s_13']),
-            's_14': float(item['s_14']),
-            's_15': float(item['s_15']),
-            's_16': float(item['s_16']),
-            's_17': float(item['s_17']),
-            's_18': float(item['s_18']),
-            's_19': float(item['s_19'])
+            'c_1': float(item['c_1'])
     }
 
 def voltagesEntity(entity) -> list:

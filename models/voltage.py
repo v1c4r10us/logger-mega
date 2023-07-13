@@ -15,11 +15,4 @@ class Voltage(BaseModel):
     s_9: float
     s_10: float
     s_11: float
-    s_12: float
-    s_13: float
-    s_14: float
-    s_15: float
-    s_16: float
-    s_17: float
-    s_18: float
-    s_19: float
+    c_1: float
